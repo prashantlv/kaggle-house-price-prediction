@@ -4,6 +4,7 @@ def train_model(X,Y):
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.layers import Input, Dense, Dropout, Activation
     from tensorflow.keras.optimizers import Adam
+    from tensorflow.keras.losses import MSE
     import pandas as pd
 
     # from sklearn.preprocessing import StandardScaler
@@ -13,11 +14,10 @@ def train_model(X,Y):
     # Y = sc.fit_transform(Y)
     # print('before dummies')
     X = pd.get_dummies(X)
-
-    print(X.head)
+    print('Printing dummies shape....', X.shape)
 
     model =Sequential([
-        Dense(124, input_shape = X.shape,  activation = 'relu' ),
+        Dense(124, input_shape =(838,)),
         Dense(124, activation = 'relu'),
         Dropout(0.3),
         Dense(62, activation = 'relu'),
@@ -29,8 +29,8 @@ def train_model(X,Y):
 
     model.compile(
         optimizer='adam',  
-        loss = 'sparse_categorical_crossentropy',
+        loss = 'mse',
         metrics= ['accuracy']
     )
 
-    r = model.fit(X, Y, epochs = 40, validation_split=0.4)
+    r = model.fit(X, Y, epochs = 240, validation_split=0.4)
