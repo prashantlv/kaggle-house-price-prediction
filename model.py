@@ -33,4 +33,4 @@ def train_model(X,Y):
         metrics= ['accuracy']
     )
 
-    r = model.fit(X, Y, epochs = 240, validation_split=0.4)
+    r = model.fit(X, Y, epochs = 140, validation_split=0.2)
